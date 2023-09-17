@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button-container button {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .title-container h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  /* Estilo para el botón activo (vista actual) */
+  .button-active {
+    background-color: #3498db;
+    color: white;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  .close {
+    float: right;
+    cursor: pointer;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+  }
+
+
+
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .controls-container input {
+    padding: 10px;
+    width: 35%;
+  }
+  
+  .controls-container select {
+    padding: 10px;
+    width: 35%;
+  }
+
+
+  .pokemon-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra las cajas horizontalmente */
+  }
+  
+  .pokemon-box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 10px;
+    width: 150px; /* Ajusta el ancho de las cajas*/
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pokemon-box img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+  
+  
+  
