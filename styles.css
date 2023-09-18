@@ -114,4 +114,97 @@ header {
   }
   
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  #pokemonDetailModal .modal-content {
+    max-width: 600px;
+    margin: 10% auto;
+  }
+  
+  #pokemonDetailModal .row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #pokemonDetailModal .row:first-child {
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+  }
+  
+  #pokemonDetailModal .row:nth-child(2) {
+    padding: 10px 0;
+  }
+  
+  #pokemonDetailModal .row:nth-child(3) {
+    display: flex;
+  }
+  
+  #pokemonDetailModal .description {
+    flex: 1;
+  }
+  
+  #pokemonDetailModal .description p {
+    text-align: justify;
+  }
+  
+  #pokemonDetailModal .pokemon-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+  
+  #pokemonDetailModal .pokemon-info .info-item {
+    text-align: center;
+  }
+  
+  #pokemonDetailModal .pokemon-info .info-item img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+  
+  #pokemonDetailModal .details {
+    flex: 1;
+    padding: 0 10px;
+  }
+  
+  #pokemonDetailModal .details .detail-item {
+    margin-bottom: 10px;
+  }
+  
+  #pokemonDetailModal .details .detail-item span {
+    font-weight: bold;
+  }
+  
+  #pokemonDetailModal .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  #pokemonDetailModal .close:hover {
+    color: #ff0000;
+  }
   
