@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const switchViewButton = document.getElementById('switchViewButton');
     const pokedexView = document.getElementById('pokedexView');
     const boxesView = document.getElementById('boxesView');
+    const cssLink = document.getElementById('css-link');
+
 
     // Obtener los modales y los botones
     const signInModal = document.getElementById('signInModal');
@@ -36,10 +38,12 @@ document.addEventListener('DOMContentLoaded', function () {
         pokedexView.style.display = 'block';
         boxesView.style.display = 'none';
         switchViewButton.classList.add('button-active');
+        cssLink.href = 'stylePokedex.css';
       } else {
         pokedexView.style.display = 'none';
         boxesView.style.display = 'block';
         switchViewButton.classList.remove('button-active');
+        cssLink.href = 'styles.css';
       }
     });
 
