@@ -636,7 +636,7 @@ header {
 
 
 @media screen and (max-height:600px),
-        screen and (max-width:600px){
+        screen and (max-width:750px){
     #left-side,
 #right-side {
     width: 380px;
