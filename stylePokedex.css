@@ -636,11 +636,20 @@ header {
 
 
 @media screen and (max-height:600px),
-    screen and (max-height:600px){
+        screen and (max-height:600px){
     #left-side,
 #right-side {
     width: 380px;
 }
+header {
+    max-height: 85px;
+    font-size: 8pt;
+}
+
+.button-container button {
+    max-width: 90px;
+}
+
 #left-side {
     height: 425px;
     max-width: 250px;
