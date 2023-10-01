@@ -249,7 +249,61 @@ document.addEventListener('DOMContentLoaded', function () {
       // Muestra el modal de detalle del Pokémon
       pokemonDetailModal.style.display = 'block';
     }
-    
+
+
+
+    const previousButton = document.querySelector(".cross-left");
+    const nextButton = document.querySelector(".cross-right");
+    const upButton = document.querySelector(".cross-top");
+    const downButton = document.querySelector(".cross-bottom");
+    // Add event listeners to the "Previous" and "Next" buttons.
+    upButton.addEventListener("click", () => {
+      nextPokemon();
+    });
+    downButton.addEventListener("click", () => {
+      previousPokemon();
+    });
+
+    previousButton.addEventListener("click", () => {
+        previousPokemon();
+    });
+
+    nextButton.addEventListener("click", () => {
+        nextPokemon();
+    });
+
+
+        let currentPokemonIndex = 0
+
+        function nextPokemon() {
+          currentPokemonIndex = currentPokemonIndex + 1
+          if (currentPokemonIndex >= currentPokemon.length) {
+            currentPokemonIndex = 0
+          }
+          const pokemon = currentPokemon[currentPokemonIndex];
+          displayPokemon(pokemon)
+        }
+
+        function displayPokemon(pokemon) {
+          const Pname = document.getElementById('pokemon-name');
+          const PNumber = document.getElementById('pokemon-number');
+          const PImage = document.getElementById('screen-left-image');
+          const PDesct = document.getElementById('pokemon-desc');
+          PDesct.textContent = pokemon.description;
+              PImage.src = pokemon.pokemonImageSrc;
+              PNumber.textContent = pokemon.pokemonID;
+              Pname.textContent = pokemon.name;
+          }
+        function previousPokemon() {
+          currentPokemonIndex = currentPokemonIndex - 1
+          if (currentPokemonIndex < 0) {
+            currentPokemonIndex = currentPokemon.length -1
+          }
+          const pokemon = currentPokemon[currentPokemonIndex];
+          displayPokemon(pokemon)
+        }
+
+        
 
 
 
