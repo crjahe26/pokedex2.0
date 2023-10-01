@@ -113,29 +113,10 @@ header {
     margin-bottom: 10px;
   }
   
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Estilos para el modal de vista detallada */
 
   #pokemonDetailModal .modal-content {
-    max-width: 600px;
+    max-width: 90%;
     margin: 10% auto;
   }
   
@@ -144,7 +125,7 @@ header {
     justify-content: space-between;
   }
   
-  #pokemonDetailModal .row:first-child {
+/*   #pokemonDetailModal .row:first-child {
     border-bottom: 2px solid #ccc;
     padding-bottom: 10px;
   }
@@ -155,10 +136,11 @@ header {
   
   #pokemonDetailModal .row:nth-child(3) {
     display: flex;
-  }
+  } */
   
   #pokemonDetailModal .description {
     flex: 1;
+    padding: 0 5%;
   }
   
   #pokemonDetailModal .description p {
@@ -178,14 +160,19 @@ header {
   }
   
   #pokemonDetailModal .pokemon-info .info-item img {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 10px;
+    width: 90%;
+    height: 90%;
+    margin-bottom: 5%;
   }
   
   #pokemonDetailModal .details {
     flex: 1;
-    padding: 0 10px;
+    padding: 0 5%;
+  }
+
+  #pokemonDetailModal .location-item {
+    flex: 1;
+    padding: 0 5%;
   }
   
   #pokemonDetailModal .details .detail-item {
@@ -197,7 +184,6 @@ header {
   }
   
   #pokemonDetailModal .close {
-    position: absolute;
     top: 10px;
     right: 10px;
     font-size: 24px;
@@ -207,4 +193,12 @@ header {
   #pokemonDetailModal .close:hover {
     color: #ff0000;
   }
-  
+
+
+  /* Estilos para pantallas pequeñas */
+@media (max-width: 854px) {
+  #pokemonDetailModal .row {
+    flex-direction: column;
+  }
+}
+

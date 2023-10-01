@@ -91,6 +91,11 @@
             <p id="pokemonID">ID del Pokémon</p>
             <img id="pokemonImage" src="" alt="Pokémon">
           </div>
+
+          <div class="info-item">
+            <p id="evolution">Nombre e ID de la evolución</p>
+            <img id="evolutionImage" src="" alt="Evolución del Pokémon">
+          </div>
         </div>
       </div>
   
@@ -107,10 +112,10 @@
           <div class="detail-item">
             <p>Tipo: <span id="pokemonDetailType">Tipo(s) del Pokémon</span></p>
           </div>
-  
-          <div class="detail-item">
-            <p>Lugar de encuentro: <span id="pokemonEncounterLocation">Lugar de encuentro</span></p>
-          </div>
+        </div>
+
+        <div class="location-item">
+          <p>Lugar de encuentro: <span id="pokemonEncounterLocation">Lugar de encuentro</span></p>
         </div>
       </div>
     </div>
@@ -157,21 +162,23 @@
 
   <!-- Contenedor para la vista de cajas -->
     <div id="boxesView" class="pokemon-container">
+        <!-- <div class="pokemon-box" onclick="openPokemonDetailModal('Pichu', './src/images/pichu.png', '172', './src/images/pichu.png', 'Raichu', './src/images/raichu.png', '025', './src/images/pikachu.png', 'Descripción de Pichu', '172', 'Eléctrico', 'Bosque Verde')"> -->
         <div class="pokemon-box">
-            <img src="imagen_pokemon_1.jpg" alt="Pokémon 1">
-            <h3>Pokémon 1</h3>
-            <p>Tipo: Tipo1, Tipo2</p>
+            <img src="./src/images/pichu.png" alt="Pichu">
+            <h3>Pichu</h3>
+            <p>Tipo: Electrico</p>
         </div>
     
         <div class="pokemon-box">
-            <img src="imagen_pokemon_2.jpg" alt="Pokémon 2">
-            <h3>Pokémon 2</h3>
+            <img src="./src/images/pikachu.png" alt="Pikachu">
+            <h3>Pikachu</h3>
             <p>Tipo: Tipo3</p>
         </div>
-    
+        
+        <!-- <div class="pokemon-box" onclick="openPokemonDetailModal('Raichu', './src/images/raichu.png', '026', './src/images/raichu.png', null, '', '026', './src/images/raichu.png', 'Descripción de Raichu', '026', 'Eléctrico', 'Bosque Verde')"> -->
         <div class="pokemon-box">
-            <img src="imagen_pokemon_3.jpg" alt="Pokémon 3">
-            <h3>Pokémon 3</h3>
+            <img src="./src/images/raichu.png" alt="Raichu">
+            <h3>Raichu</h3>
             <p>Tipo: Tipo4, Tipo5</p>
         </div>
 
