@@ -456,6 +456,50 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+  // Función para abrir el modal para agregar un nuevo Pokémon
+  function openAddPokemonModal() {
+    const addPokemonModal = document.getElementById('addPokemonModal');
+    addPokemonModal.style.display = 'block';
+  }
+
+  // Función para cerrar el modal para agregar un nuevo Pokémon
+  function closeAddPokemonModal() {
+    const addPokemonModal = document.getElementById('addPokemonModal');
+    addPokemonModal.style.display = 'none';
+  }
+
+  // Evento para abrir el modal al hacer clic en el botón flotante
+  const addPokemonButton = document.getElementById('addPokemonButton');
+  addPokemonButton.addEventListener('click', openAddPokemonModal);
+
+  // Evento para cerrar el modal al hacer clic en la "x"
+  const closeAddPokemonModalButton = document.getElementById('closeAddPokemonModal');
+  closeAddPokemonModalButton.addEventListener('click', closeAddPokemonModal);
+
+  // Evento para cerrar el modal al hacer clic fuera de él
+  window.addEventListener('click', function (event) {
+    const addPokemonModal = document.getElementById('addPokemonModal');
+    if (event.target === addPokemonModal) {
+      addPokemonModal.style.display = 'none';
+    }
+  });
+
+  // Evitar que los clics dentro del modal lo cierren
+  const addPokemonModalContent = document.querySelector('#addPokemonModal .modal-content');
+  addPokemonModalContent.addEventListener('click', function (event) {
+    event.stopPropagation();
+  });
+
+  // Evento para agregar un nuevo Pokémon
+  const submitNewPokemonButton = document.getElementById('submitNewPokemonButton');
+  submitNewPokemonButton.addEventListener('click', function () {
+
+  });
+
+    
+
+
+
 
 
 
