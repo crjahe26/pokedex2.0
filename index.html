@@ -11,6 +11,7 @@
 <body>
 
 <header>
+
   <!-- Botón para cambiar entre la vista de cajas y la vista tipo pokedex -->
   <div class="button-container">
     <button id="switchViewButton">Cambiar Vista</button>
@@ -74,7 +75,7 @@
   </div>
 
 
-
+  <!-- Modal de la vista detallada de los pokemon -->
   <div id="pokemonDetailModal" class="modal">
     <div class="modal-content">
       <span class="close" id="closePokemonDetailModal">&times;</span>
@@ -122,6 +123,58 @@
   </div>
 
 
+  <!-- Modal para agregar pokemon -->
+
+  <div id="addPokemonModal" class="modal">
+    <div class="modal-content">
+      <span id="closeAddPokemonModal" class="close">&times;</span>
+      <h2>Agregar Nuevo Pokémon</h2>
+      <form id="addPokemonForm">
+        <label for="pokemonName">Nombre del Pokémon:</label>
+        <input type="text" id="pokemonName" name="pokemonName" required><br><br>
+      
+        <label for="pokemonID">ID del Pokémon:</label>
+        <input type="text" id="pokemonID" name="pokemonID" required><br><br>
+      
+        <label for="pokemonImage">Imagen del Pokémon:</label>
+        <input type="file" id="pokemonImage" name="pokemonImage" accept="image/*" required><br><br>
+      
+        <label for="pokemonDescription">Descripción del Pokémon:</label>
+        <textarea id="pokemonDescription" name="pokemonDescription" rows="4" cols="50" required></textarea><br><br>
+      
+        <label for="pokemonTypes">Tipo o tipos del Pokémon:</label>
+        <input type="text" id="pokemonTypes" name="pokemonTypes" required><br><br>
+      
+        <label for="encounterLocation">Lugar donde se puede encontrar el Pokémon:</label>
+        <input type="text" id="encounterLocation" name="encounterLocation" required><br><br>
+      
+        <h3>Preevolución (opcional)</h3>
+        <label for="preEvolutionID">ID de la preevolución:</label>
+        <input type="text" id="preEvolutionID" name="preEvolutionID"><br><br>
+      
+        <label for="preEvolutionName">Nombre de la preevolución:</label>
+        <input type="text" id="preEvolutionName" name="preEvolutionName"><br><br>
+      
+        <label for="preEvolutionImage">Imagen de la preevolución:</label>
+        <input type="file" id="preEvolutionImage" name="preEvolutionImage" accept="image/*"><br><br>
+      
+        <h3>Evolución (opcional)</h3>
+        <label for="evolutionID">ID de la evolución:</label>
+        <input type="text" id="evolutionID" name="evolutionID"><br><br>
+      
+        <label for="evolutionName">Nombre de la evolución:</label>
+        <input type="text" id="evolutionName" name="evolutionName"><br><br>
+      
+        <label for="evolutionImage">Imagen de la evolución:</label>
+        <input type="file" id="evolutionImage" name="evolutionImage" accept="image/*"><br><br>
+      
+        <button type="submit" id="submitNewPokemonButton">Agregar</button>
+      
+      </form>
+    </div>
+  </div>
+
+
 </header>
 
 
@@ -134,7 +187,10 @@
   <div class="controls-container">
     <!-- Campo de búsqueda -->
     <input type="text" id="searchInput" placeholder="Buscar Pokémon">
-  
+    
+    <button id="addPokemonButton" class="floating-button"></button>
+
+
     <!-- Dropdown list para filtrar por tipo -->
     <select id="typeFilter">
       <option value="all">Todos los tipos</option>
@@ -234,9 +290,6 @@
             <p>Tipo: Agua</p>
         </div>
     </div>
-    
-
-    <p>Contenido de la vista de cajas...</p>
 </div>
 
 <!-- Contenedor para la vista tipo pokedex -->
