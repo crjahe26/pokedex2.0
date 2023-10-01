@@ -289,10 +289,12 @@ document.addEventListener('DOMContentLoaded', function () {
           const PNumber = document.getElementById('pokemon-number');
           const PImage = document.getElementById('screen-left-image');
           const PDesct = document.getElementById('pokemon-desc');
+          const PType = document.getElementById('pokemon-type');
           PDesct.textContent = pokemon.description;
-              PImage.src = pokemon.pokemonImageSrc;
-              PNumber.textContent = pokemon.pokemonID;
-              Pname.textContent = pokemon.name;
+          PImage.src = pokemon.pokemonImageSrc;
+          PNumber.textContent = pokemon.pokemonID;
+          Pname.textContent = pokemon.name;
+          PType.textContent = pokemon.detailType;
           }
         function previousPokemon() {
           currentPokemonIndex = currentPokemonIndex - 1
