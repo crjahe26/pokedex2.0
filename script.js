@@ -4,45 +4,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const pokedexView = document.getElementById('pokedexView');
     const boxesView = document.getElementById('boxesView');
     const cssLink = document.getElementById('css-link');
-
-  
-
-
-
-    function searchPokemon() {
-      const searchInput = document.getElementById('searchInput');
-      const searchTerm = searchInput.value.toLowerCase();
-  
-      const pokemonContainers = document.querySelectorAll('.pokemon-box');
-      pokemonContainers.forEach(pokemonContainer => {
-          const pokemonId = pokemonContainer.getAttribute('data-pokemon-id');
-          const foundPokemon = currentPokemon.find(pokemon => pokemon.pokemonID === pokemonId);
-  
-          if (foundPokemon && foundPokemon.name.toLowerCase().includes(searchTerm)) {
-              pokemonContainer.classList.add('visible');
-              pokemonContainer.classList.remove('hidden');
-              pokemonContainer.classList.add('centered-box');
-          } else {
-              pokemonContainer.classList.add('hidden');
-              pokemonContainer.classList.remove('visible');
-              pokemonContainer.classList.remove('centered-box');
-          }
-      });
-  
-      // Obtén las cajas visibles y centra su contenedor
-      const visiblePokemonContainers = document.querySelectorAll('.pokemon-box.visible');
-      const pokemonContainer = document.getElementById('boxesView');
-      pokemonContainer.style.justifyContent = visiblePokemonContainers.length > 0 ? 'center' : 'flex-start';
-  }
-
     
-    
-
-    
+    // Filtrado por nombre
     const searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('input', searchPokemon);
     
-    
+    // Filtrado por tipo
+    const typeFilter = document.getElementById('typeFilter');
+    typeFilter.addEventListener('change', searchPokemon);
+
 
     // Obtener los modales y los botones
     const signInModal = document.getElementById('signInModal');
@@ -451,7 +421,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
+    function searchPokemon() {
+      const searchInput = document.getElementById('searchInput');
+      const searchTerm = searchInput.value.toLowerCase();
+      const typeFilter = document.getElementById('typeFilter').value;
+    
+      const pokemonContainers = document.querySelectorAll('.pokemon-box');
+      pokemonContainers.forEach(pokemonContainer => {
+        const pokemonId = pokemonContainer.getAttribute('data-pokemon-id');
+        const foundPokemon = currentPokemon.find(pokemon => pokemon.pokemonID === pokemonId);
+    
+        // Comprueba si el nombre y el tipo coinciden con los filtros
+        const nameMatches = foundPokemon && foundPokemon.name.toLowerCase().includes(searchTerm);
+        const typeMatches = typeFilter === 'all' || (foundPokemon && foundPokemon.detailType.includes(typeFilter));
+    
+        if (nameMatches && typeMatches) {
+          pokemonContainer.classList.add('visible');
+          pokemonContainer.classList.remove('hidden');
+          pokemonContainer.classList.add('centered-box');
+        } else {
+          pokemonContainer.classList.add('hidden');
+          pokemonContainer.classList.remove('visible');
+          pokemonContainer.classList.remove('centered-box');
+        }
+      });
+    
+      // Obtén las cajas visibles y centra su contenedor
+      const visiblePokemonContainers = document.querySelectorAll('.pokemon-box.visible');
+      const pokemonContainer = document.getElementById('boxesView');
+      pokemonContainer.style.justifyContent = visiblePokemonContainers.length > 0 ? 'center' : 'flex-start';
+    }
 
 
 
