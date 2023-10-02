@@ -491,9 +491,33 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Evento para agregar un nuevo Pokémon
-  const submitNewPokemonButton = document.getElementById('submitNewPokemonButton');
-  submitNewPokemonButton.addEventListener('click', function () {
+  const submitNewPokemonButton = document.getElementById('addPokemonForm');
+  document.getElementById('addPokemonForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const name = document.getElementById('pokemonName').value;
+    const newPokemonId = document.getElementById('pokemonId').value;
+    const src = document.getElementById('pokemonImage').value;
+    const description = document.getElementById('pokemonDescriptions').value;
+    const tipos = document.getElementById('pokemonTypes').value;
 
+    // Crear una nueva caja con la información del Pokémon
+    const pokemonBox = document.createElement('div');
+    pokemonBox.classList.add('pokemon-box');
+    pokemonBox.dataset.pokemonId = newPokemonId;
+    pokemonBox.innerHTML = `
+        <img src="${src}" alt="${name}">
+        <h3>${name}</h3>
+        <p>Tipo:${tipos}</p>`;
+
+
+    // Agregar la caja al contenedor de Pokémon
+    const pokemonContainer = document.getElementById('boxesViews');
+    pokemonContainer.appendChild(pokemonBox);
+    closeAddPokemonModal()
+
+    // Limpiar los campos del formulario
+    document.getElementById('name').value = '';
+    document.getElementById('type').value = '';
   });
 
     
