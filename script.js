@@ -5,9 +5,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const boxesView = document.getElementById('boxesView');
     const cssLink = document.getElementById('css-link');
     
-    // Filtrado por nombre
+    // Filtrado por nombre vista cajas
     const searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('input', searchPokemon);
+
+    // Filtrado por nombre vista pokedex
+    const searchInputPokedex = document.getElementById('buscar-field');
+    searchInputPokedex.addEventListener('input', searchPokemonPokedex);
     
     // Filtrado por tipo
     const typeFilter = document.getElementById('typeFilter');
@@ -476,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
+    //Funcion para buscar pokemon vista de cajas
     function searchPokemon() {
       const searchInput = document.getElementById('searchInput');
       const searchTerm = searchInput.value.toLowerCase();
@@ -506,6 +510,39 @@ document.addEventListener('DOMContentLoaded', function () {
       const visiblePokemonContainers = document.querySelectorAll('.pokemon-box.visible');
       const pokemonContainer = document.getElementById('boxesView');
       pokemonContainer.style.justifyContent = visiblePokemonContainers.length > 0 ? 'center' : 'flex-start';
+    }
+
+    //Funcion para buscar pokemon vista de pokedex
+    function searchPokemonPokedex() {
+      const searchInputPokedex = document.getElementById('buscar-field');
+
+      function searchAndDisplayPokemon() {
+        const searchTermPokedex = searchInputPokedex.value.toLowerCase();
+        
+        // Iterar sobre la lista de pokémon
+        for (const pokemon of currentPokemon) {
+          // Convertir el nombre del Pokémon a minúsculas para hacer la comparación
+          const pokemonName = pokemon.name.toLowerCase();
+          
+          // Verificar si el término de búsqueda está incluido en el nombre del Pokémon
+          if (pokemonName.includes(searchTermPokedex)) {
+            // Si lo encuentra, muestra el Pokémon y detiene la iteración
+            displayPokemon(pokemon);
+            return;
+          }
+        }
+        
+        // Si no se encuentra ningún Pokémon, muestra un mensaje de error
+        console.log('No se encontró ningún Pokémon con ese nombre.');
+      }
+
+      // Escuchar el evento de pulsación de tecla en el campo de búsqueda
+      searchInputPokedex.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+          searchAndDisplayPokemon();
+        }
+      });
+
     }
 
 
@@ -649,11 +686,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+  // Función para abrir el modal para agregar un nuevo Pokémon
+  function openAddPokemonModal() {
+    const addPokemonModal = document.getElementById('addPokemonModal');
+    addPokemonModal.style.display = 'block';
+  }
 
+  // Función para cerrar el modal para agregar un nuevo Pokémon
+  function closeAddPokemonModal() {
+    const addPokemonModal = document.getElementById('addPokemonModal');
+    addPokemonModal.style.display = 'none';
+  }
 
+  // Evento para abrir el modal al hacer clic en el botón flotante
+  const addPokemonButtonPokedex = document.getElementById('addPokemonButtonPokedex');
+  addPokemonButtonPokedex.addEventListener('click', openAddPokemonModal);
 
+  // Evento para cerrar el modal al hacer clic en la "x"
+  const closeAddPokemonModalButtonpokedex = document.getElementById('closeAddPokemonModal');
+  closeAddPokemonModalButtonpokedex.addEventListener('click', closeAddPokemonModal);
 
+  // Evento para cerrar el modal al hacer clic fuera de él
+  window.addEventListener('click', function (event) {
+    const addPokemonModal = document.getElementById('addPokemonModal');
+    if (event.target === addPokemonModal) {
+      addPokemonModal.style.display = 'none';
+    }
+  });
 
+  // Evitar que los clics dentro del modal lo cierren
+  const addPokemonModalContentpokedex = document.querySelector('#addPokemonModal .modal-content');
+  addPokemonModalContentpokedex.addEventListener('click', function (event) {
+    event.stopPropagation();
+  });
 
 
 
@@ -734,181 +799,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /* function openPokemonDetailModal(pokemonId) {
-      const pokemonBox = document.querySelector('.pokemon-box');
-      const pokemonId = pokemonBox.getAttribute('data-pokemon-id');
-      const pokemonDetailName = document.getElementById('pokemonDetailName');
-      const preEvolution = document.getElementById('preEvolution');
-      const preEvolutionImage = document.getElementById('preEvolutionImage');
-      const evolution = document.getElementById('evolution');
-      const evolutionImage = document.getElementById('evolutionImage');
-      const pokemonID = document.getElementById('pokemonID');
-      const pokemonImage = document.getElementById('pokemonImage');
-      const pokemonDescription = document.getElementById('pokemonDescription');
-      const pokemonDetailID = document.getElementById('pokemonDetailID');
-      const pokemonDetailType = document.getElementById('pokemonDetailType');
-      const pokemonEncounterLocation = document.getElementById('pokemonEncounterLocation');
-  
-      // Simula la información del Pokémon actual
-      const currentPokemon = [
-        {
-          name: 'Pikachu',
-          pokemonID: '025',
-          pokemonImageSrc: './src/images/pikachu.png',
-          description: 'Las bolsas de las mejillas están llenas de electricidad, que libera cuando se siente amenazado.',
-          detailID: '025',
-          detailType: 'Eléctrico',
-          encounterLocation: 'Bosque Verde',
-
-          preEvolutionID: '172',
-          preEvolution: 'Pichu',
-          preEvolutionImageSrc: './src/images/pichu.png',
-
-          evolutionID: '026',
-          evolution: 'Raichu',
-          evolutionImageSrc: './src/images/raichu.png'
-        },
-        {
-          name: 'Pichu',
-          pokemonID: '172',
-          pokemonImageSrc: './src/images/pichu.png',
-          description: 'A pesar de su pequeño tamaño, ataca incluso a los humanos, algo que le sorprende hasta a él.',
-          detailID: '172',
-          detailType: 'Eléctrico',
-          encounterLocation: 'Bosque Verde',
-
-          preEvolutionID: null,
-          preEvolution: null,
-          preEvolutionImageSrc: null,
-
-          evolutionID: '025',
-          evolution: 'Pikachu',
-          evolutionImageSrc: './src/images/pikachu.png'
-        },
-        {
-          name: 'Raichu',
-          pokemonID: '026',
-          pokemonImageSrc: './src/images/raichu.png',
-          description: 'Las bolsas de las mejillas están llenas de electricidad, que libera cuando se siente amenazado.',
-          detailID: '026',
-          detailType: 'Eléctrico',
-          encounterLocation: 'Bosque Verde',
-
-          preEvolutionID: '025',
-          preEvolution: 'Pikachu',
-          preEvolutionImageSrc: './src/images/pikachu.png',
-
-          evolutionID: null,
-          evolution: null,
-          evolutionImageSrc: null
-        }
-      ];
-  
-
-      const pokemonIDToFind = pokemonId;  // El ID del Pokémon que quieres buscar
-
-      let foundPokemon = currentPokemon.find(pokemon => pokemon.pokemonID === pokemonId);
-
-      for (let i = 0; i < currentPokemon.length; i++) {
-        if (currentPokemon[i].pokemonID === pokemonIDToFind) {
-          foundPokemon = i;
-          break;  // Si se encuentra el Pokémon, se puede salir del bucle
-        }
-      }
-
-      if (foundPokemon) {
-        console.log('Pokémon encontrado:', foundPokemon);
-      } else {
-        console.log('No se encontró ningún Pokémon con ese ID.');
-      }
-
-
-
-      // Actualiza el contenido del modal con la información del Pokémon
-      pokemonDetailName.innerText = currentPokemon[foundPokemon].name;
-      preEvolution.innerText = `Pre-evolución: ${currentPokemon[foundPokemon].preEvolution} (ID: ${currentPokemon[foundPokemon].preEvolutionID})`;
-      preEvolutionImage.src = currentPokemon[foundPokemon].preEvolutionImageSrc;
-      evolution.innerText = `Evolución: ${currentPokemon[foundPokemon].evolution} (ID: ${currentPokemon[foundPokemon].evolutionID})`;
-      evolutionImage.src = currentPokemon[foundPokemon].evolutionImageSrc;
-      pokemonID.innerText = `ID: ${currentPokemon[foundPokemon].pokemonID}`;
-      pokemonImage.src = currentPokemon[foundPokemon].pokemonImageSrc;
-      pokemonDescription.innerText = currentPokemon[foundPokemon].description;
-      pokemonDetailID.innerText = currentPokemon[foundPokemon].detailID;
-      pokemonDetailType.innerText = currentPokemon[foundPokemon].detailType;
-      pokemonEncounterLocation.innerText = currentPokemon[foundPokemon].encounterLocation;
-  
-      // Muestra el modal de detalle del Pokémon
-      pokemonDetailModal.style.display = 'block';
-    } */
-
-    /* function openPokemonDetailModal(name, preEvolutionImageSrc, preEvolutionID, pokemonImageSrc, evolution, evolutionImageSrc, pokemonID, pokemonImage, description, detailID, detailType, encounterLocation) {
-      const pokemonDetailName = document.getElementById('pokemonDetailName');
-      const preEvolution = document.getElementById('preEvolution');
-      const preEvolutionImage = document.getElementById('preEvolutionImage');
-      const evolutionElement = document.getElementById('evolution');
-      const evolutionImage = document.getElementById('evolutionImage');
-      const pokemonIDElement = document.getElementById('pokemonID');
-      const pokemonImageElement = document.getElementById('pokemonImage');
-      const pokemonDescription = document.getElementById('pokemonDescription');
-      const pokemonDetailID = document.getElementById('pokemonDetailID');
-      const pokemonDetailType = document.getElementById('pokemonDetailType');
-      const pokemonEncounterLocation = document.getElementById('pokemonEncounterLocation');
-
-      // Actualiza el contenido del modal con la información del Pokémon
-      pokemonDetailName.innerText = name;
-      preEvolution.innerText = `Pre-evolución: ${name} (ID: ${preEvolutionID})`;
-      preEvolutionImage.src = preEvolutionImageSrc;
-      
-      if (evolution) {
-        evolutionElement.innerText = `Evolución: ${evolution} (ID: ${pokemonID})`;
-        evolutionImage.src = evolutionImageSrc;
-      } else {
-        evolutionElement.innerText = '';
-        evolutionImage.src = '';
-      }
-
-      pokemonIDElement.innerText = `ID: ${pokemonID}`;
-      pokemonImageElement.src = pokemonImageSrc;
-      pokemonDescription.innerText = description;
-      pokemonDetailID.innerText = `ID: ${detailID}`;
-      pokemonDetailType.innerText = `Tipo: ${detailType}`;
-      pokemonEncounterLocation.innerText = `Lugar de encuentro: ${encounterLocation}`;
-
-      // Muestra el modal de detalle del Pokémon
-      pokemonDetailModal.style.display = 'block';
-    } */
 
 
 
