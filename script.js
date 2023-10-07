@@ -631,6 +631,8 @@ document.addEventListener('DOMContentLoaded', function () {
       // Agregar el contenedor de Pokémon al cuerpo del documento
       const pokemonContainer = document.getElementById('boxesViews');
       pokemonContainer.appendChild(pokemonBox);
+
+      
       closeAddPokemonModal()
     }
   
@@ -647,10 +649,10 @@ document.addEventListener('DOMContentLoaded', function () {
       const pokemonPlace = document.getElementById('encounterLocation').value;
       const preEvolutionID = document.getElementById('preEvolutionID').value;
       const preEvolutionName = document.getElementById('preEvolutionName').value;
-      const preEvolutionImage = document.getElementById('preEvolutionImage').value;
+      const preEvolutionImage = document.getElementById('preEvolutionImages').value;
       const evolutionID = document.getElementById('evolutionID').value;
       const evolutionName = document.getElementById('evolutionName').value;
-      const evolutionImage = document.getElementById('evolutionImage').value;
+      const evolutionImage = document.getElementById('evolutionImages').value;
     
       // Llenar el objeto newPokemon con la información del formulario
       newPokemon.name = name;
@@ -671,6 +673,16 @@ document.addEventListener('DOMContentLoaded', function () {
     
       // Llamar a la función para mostrar el nuevo Pokémon
       createPokemonElement(newPokemon);
+
+
+      const pokemonContainers = document.querySelectorAll('.pokemon-box');
+    
+      pokemonContainers.forEach(pokemonContainer => {
+        pokemonContainer.addEventListener('click', function () {
+          const pokemonId = this.getAttribute('data-pokemon-id');
+          openPokemonDetailModal(pokemonId);  // Pasamos el pokemonId a la función
+        });
+      });
     
       // Limpiar el formulario
       document.getElementById('addPokemonForm').reset();
