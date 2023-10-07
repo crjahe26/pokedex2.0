@@ -679,11 +679,11 @@ document.addEventListener('DOMContentLoaded', function () {
     newPokemon.detailType = pokemonType;
     newPokemon.encounterLocation = pokemonPlace;
     newPokemon.preEvolutionID = preEvolutionID;
-    newPokemon.preEvolutionName = preEvolutionName;
-    newPokemon.preEvolutionImage = preEvolutionImage;
+    newPokemon.preEvolution = preEvolutionName;
+    newPokemon.preEvolutionImageSrc = preEvolutionImage;
     newPokemon.evolutionID = evolutionID;
-    newPokemon.evolutionName = evolutionName;
-    newPokemon.evolutionImage = evolutionImage;
+    newPokemon.evolution = evolutionName;
+    newPokemon.evolutionImageSrc = evolutionImage;
     
     // Agregar el nuevo Pokémon a currentPokemon
     currentPokemon.push(newPokemon);
