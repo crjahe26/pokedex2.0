@@ -10,12 +10,12 @@ La interfaz permite al usuario ver la información de los Pokémon en dos vistas
 2. [Cristian Jaramillo Herrera](https://github.com/crjahe26)
 
 ## Instrucciones de Ejecución
-Para ejecutar la Pokédex en tu navegador, sigue estos sencillos pasos:
+Para ejecutar la Pokédex en tu navegador, sigue estos pasos:
 
 1. Clona este repositorio en tu máquina local o descárgalo como un archivo ZIP.
    
    ```bash
-   git clone https://github.com/tu-usuario/pokedex-interfaz-web.git
+   git clone https://github.com/crjahe26/pokedex2.0.git
    ```
 
 2. Abre el archivo html con tu navegador web preferido. También puedes abrir VSCode y activar LiveServer para visualizar el proyecto.
