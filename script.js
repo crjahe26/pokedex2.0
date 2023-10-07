@@ -660,7 +660,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Obtener los valores del formulario
     const name = document.getElementById('pokemonName').value;
     const pokemonID = document.getElementById('pokemonId').value;
-    const pokemonImageSrc = document.getElementById('pokemonImage').value;
+    const pokemonImageSrc = document.getElementById('addPokemonImage').value;
     // Obtener más campos según sea necesario...
   
     // Llenar el objeto newPokemon con la información del formulario
