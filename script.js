@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
+    // Listado de pokemon disponibles
     const currentPokemon = [
       {
         name: 'Pikachu',
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
+    // Modal de vista detallada
     function openPokemonDetailModal(pokemonId) {
       // Encuentra el Pokémon con el ID proporcionado
       const foundPokemon = currentPokemon.find(pokemon => pokemon.pokemonID === pokemonId);
@@ -416,59 +416,59 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-
-    const previousButton = document.querySelector(".cross-left");
-    const nextButton = document.querySelector(".cross-right");
-    const upButton = document.querySelector(".cross-top");
-    const downButton = document.querySelector(".cross-bottom");
-    // Add event listeners to the "Previous" and "Next" buttons.
-    upButton.addEventListener("click", () => {
-      nextPokemon();
-    });
-    downButton.addEventListener("click", () => {
-      previousPokemon();
-    });
-
-    previousButton.addEventListener("click", () => {
-        previousPokemon();
-    });
-
-    nextButton.addEventListener("click", () => {
+      // Funcionalidad de la vista pokedex para cambiar y moverse entre pokemon con la cruz
+      const previousButton = document.querySelector(".cross-left");
+      const nextButton = document.querySelector(".cross-right");
+      const upButton = document.querySelector(".cross-top");
+      const downButton = document.querySelector(".cross-bottom");
+      // Add event listeners to the "Previous" and "Next" buttons.
+      upButton.addEventListener("click", () => {
         nextPokemon();
-    });
+      });
+      downButton.addEventListener("click", () => {
+        previousPokemon();
+      });
+
+      previousButton.addEventListener("click", () => {
+          previousPokemon();
+      });
+
+      nextButton.addEventListener("click", () => {
+          nextPokemon();
+      });
 
 
-        let currentPokemonIndex = 0
+      let currentPokemonIndex = 0
 
-        function nextPokemon() {
-          currentPokemonIndex = currentPokemonIndex + 1
-          if (currentPokemonIndex >= currentPokemon.length) {
-            currentPokemonIndex = 0
-          }
-          const pokemon = currentPokemon[currentPokemonIndex];
-          displayPokemon(pokemon)
+      function nextPokemon() {
+        currentPokemonIndex = currentPokemonIndex + 1
+        if (currentPokemonIndex >= currentPokemon.length) {
+          currentPokemonIndex = 0
         }
+        const pokemon = currentPokemon[currentPokemonIndex];
+        displayPokemon(pokemon)
+      }
 
-        function displayPokemon(pokemon) {
-          const Pname = document.getElementById('pokemon-name');
-          const PNumber = document.getElementById('pokemon-number');
-          const PImage = document.getElementById('screen-left-image');
-          const PDesct = document.getElementById('pokemon-desc');
-          const PType = document.getElementById('pokemon-type');
-          PDesct.textContent = pokemon.description;
-          PImage.src = pokemon.pokemonImageSrc;
-          PNumber.textContent = pokemon.pokemonID;
-          Pname.textContent = pokemon.name;
-          PType.textContent = pokemon.detailType;
-          }
-        function previousPokemon() {
-          currentPokemonIndex = currentPokemonIndex - 1
-          if (currentPokemonIndex < 0) {
-            currentPokemonIndex = currentPokemon.length -1
-          }
-          const pokemon = currentPokemon[currentPokemonIndex];
-          displayPokemon(pokemon)
+      function displayPokemon(pokemon) {
+        const Pname = document.getElementById('pokemon-name');
+        const PNumber = document.getElementById('pokemon-number');
+        const PImage = document.getElementById('screen-left-image');
+        const PDesct = document.getElementById('pokemon-desc');
+        const PType = document.getElementById('pokemon-type');
+        PDesct.textContent = pokemon.description;
+        PImage.src = pokemon.pokemonImageSrc;
+        PNumber.textContent = pokemon.pokemonID;
+        Pname.textContent = pokemon.name;
+        PType.textContent = pokemon.detailType;
         }
+      function previousPokemon() {
+        currentPokemonIndex = currentPokemonIndex - 1
+        if (currentPokemonIndex < 0) {
+          currentPokemonIndex = currentPokemon.length -1
+        }
+        const pokemon = currentPokemon[currentPokemonIndex];
+        displayPokemon(pokemon)
+      }
 
         
 
@@ -480,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-    //Funcion para buscar pokemon vista de cajas
+    //Funcion para buscar pokemon en la vista de cajas por nombre y tipo
     function searchPokemon() {
       const searchInput = document.getElementById('searchInput');
       const searchTerm = searchInput.value.toLowerCase();
@@ -512,7 +512,7 @@ document.addEventListener('DOMContentLoaded', function () {
       pokemonContainer.style.justifyContent = visiblePokemonContainers.length > 0 ? 'center' : 'flex-start';
     }
 
-    //Funcion para buscar pokemon vista de pokedex
+    //Funcion para buscar pokemon en la vista de pokedex por nombre
     function searchPokemonPokedex() {
       const searchInputPokedex = document.getElementById('buscar-field');
 
@@ -606,94 +606,75 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // Función para crear nuevos elementos (pokemon) en el dom
+    function createPokemonElement(pokemon) {
+      const pokemonBox = document.createElement('div');
+      pokemonBox.classList.add('pokemon-box');
+      pokemonBox.setAttribute('data-pokemon-id', pokemon.pokemonID);
+    
+      const img = document.createElement('img');
+      img.src = pokemon.pokemonImageSrc;
+      img.alt = pokemon.name;
+    
+      const h3 = document.createElement('h3');
+      h3.textContent = pokemon.name;
+    
+      const pType = document.createElement('p');
+      pType.textContent = 'Tipo: ' + pokemon.detailType;
 
     
-
-
-
-  function createPokemonElement(pokemon) {
-    const pokemonBox = document.createElement('div');
-    pokemonBox.classList.add('pokemon-box');
-    pokemonBox.setAttribute('data-pokemon-id', pokemon.pokemonID);
-  
-    const img = document.createElement('img');
-    img.src = pokemon.pokemonImageSrc;
-    img.alt = pokemon.name;
-  
-    const h3 = document.createElement('h3');
-    h3.textContent = pokemon.name;
-  
-    const pType = document.createElement('p');
-    pType.textContent = 'Tipo: ' + pokemon.detailType;
-  
-    // Añadir más elementos según sea necesario...
-  
-    // Agregar los elementos al contenedor de Pokémon
-    pokemonBox.appendChild(img);
-    pokemonBox.appendChild(h3);
-    pokemonBox.appendChild(pType);
-  
-    // Agregar el contenedor de Pokémon al cuerpo del documento
-    const pokemonContainer = document.getElementById('boxesViews');
-    pokemonContainer.appendChild(pokemonBox);
-    closeAddPokemonModal()
-  }
-  
+      // Agregar los elementos al contenedor de Pokémon
+      pokemonBox.appendChild(img);
+      pokemonBox.appendChild(h3);
+      pokemonBox.appendChild(pType);
     
-  function addPokemon(event) {
-    event.preventDefault();  // Evitar que la página se recargue al enviar el formulario
+      // Agregar el contenedor de Pokémon al cuerpo del documento
+      const pokemonContainer = document.getElementById('boxesViews');
+      pokemonContainer.appendChild(pokemonBox);
+      closeAddPokemonModal()
+    }
   
-    // Obtener los valores del formulario
-    const name = document.getElementById('pokemonName').value;
-    const pokemonID = document.getElementById('pokemonId').value;
-    const pokemonImageSrc = document.getElementById('addPokemonImage').value;
-    const pokemonDesc = document.getElementById('pokemonDescriptions').value;
-    const pokemonType = document.getElementById('pokemonTypes').value;
-    const pokemonPlace = document.getElementById('encounterLocation').value;
-    const preEvolutionID = document.getElementById('preEvolutionID').value;
-    const preEvolutionName = document.getElementById('preEvolutionName').value;
-    const preEvolutionImage = document.getElementById('preEvolutionImage').value;
-    const evolutionID = document.getElementById('evolutionID').value;
-    const evolutionName = document.getElementById('evolutionName').value;
-    const evolutionImage = document.getElementById('evolutionImage').value;
-  
-    // Llenar el objeto newPokemon con la información del formulario
-    newPokemon.name = name;
-    newPokemon.pokemonID = pokemonID;
-    newPokemon.pokemonImageSrc = pokemonImageSrc;
-    newPokemon.description = pokemonDesc;
-    newPokemon.detailType = pokemonType;
-    newPokemon.encounterLocation = pokemonPlace;
-    newPokemon.preEvolutionID = preEvolutionID;
-    newPokemon.preEvolution = preEvolutionName;
-    newPokemon.preEvolutionImageSrc = preEvolutionImage;
-    newPokemon.evolutionID = evolutionID;
-    newPokemon.evolution = evolutionName;
-    newPokemon.evolutionImageSrc = evolutionImage;
+    // Mapeo de atributos para el nuevo pokemon a partir de la información del modal
+    function addPokemon(event) {
+      event.preventDefault();  // Evitar que la página se recargue al enviar el formulario
     
-    // Agregar el nuevo Pokémon a currentPokemon
-    currentPokemon.push(newPokemon);
-  
-    // Llamar a la función para mostrar el nuevo Pokémon
-    createPokemonElement(newPokemon);
-  
-    // Limpiar el formulario
-    document.getElementById('pokemonForm').reset();
-  }
+      // Obtener los valores del formulario
+      const name = document.getElementById('pokemonName').value;
+      const pokemonID = document.getElementById('pokemonId').value;
+      const pokemonImageSrc = document.getElementById('addPokemonImage').value;
+      const pokemonDesc = document.getElementById('pokemonDescriptions').value;
+      const pokemonType = document.getElementById('pokemonTypes').value;
+      const pokemonPlace = document.getElementById('encounterLocation').value;
+      const preEvolutionID = document.getElementById('preEvolutionID').value;
+      const preEvolutionName = document.getElementById('preEvolutionName').value;
+      const preEvolutionImage = document.getElementById('preEvolutionImage').value;
+      const evolutionID = document.getElementById('evolutionID').value;
+      const evolutionName = document.getElementById('evolutionName').value;
+      const evolutionImage = document.getElementById('evolutionImage').value;
+    
+      // Llenar el objeto newPokemon con la información del formulario
+      newPokemon.name = name;
+      newPokemon.pokemonID = pokemonID;
+      newPokemon.pokemonImageSrc = pokemonImageSrc;
+      newPokemon.description = pokemonDesc;
+      newPokemon.detailType = pokemonType;
+      newPokemon.encounterLocation = pokemonPlace;
+      newPokemon.preEvolutionID = preEvolutionID;
+      newPokemon.preEvolution = preEvolutionName;
+      newPokemon.preEvolutionImageSrc = preEvolutionImage;
+      newPokemon.evolutionID = evolutionID;
+      newPokemon.evolution = evolutionName;
+      newPokemon.evolutionImageSrc = evolutionImage;
+      
+      // Agregar el nuevo Pokémon a currentPokemon
+      currentPokemon.push(newPokemon);
+    
+      // Llamar a la función para mostrar el nuevo Pokémon
+      createPokemonElement(newPokemon);
+    
+      // Limpiar el formulario
+      document.getElementById('addPokemonForm').reset();
+    }
   
 
 
@@ -737,93 +718,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  });
+});
 
 
 
