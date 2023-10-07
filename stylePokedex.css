@@ -686,6 +686,17 @@ header {
     top: 12px;
 }
 
+#screen-left-image {
+    width: 130px;
+    height: auto;
+    max-height: 130px;
+}
+
+#screen-right .pokemon-stats-left {
+    max-width: 140px;
+    padding-left: 0px;
+}
+
 #screen-left-little-lights {
     display: none;
 }
@@ -712,6 +723,10 @@ header {
 #cross {
     left: 165px;
     top: -7px;
+}
+
+#grey-buttons p {
+    line-height: 5pt;
 }
 
 .binding {
@@ -768,7 +783,7 @@ header {
 }
 
 #grey-buttons .key {
-    width: 63px;
+    width: auto;
     height: 30px;
 }
 #screen-right #pokemon-title-p {
