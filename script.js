@@ -661,6 +661,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const name = document.getElementById('pokemonName').value;
     const pokemonID = document.getElementById('pokemonId').value;
     const pokemonImageSrc = document.getElementById('addPokemonImage').value;
+<<<<<<< HEAD
     const pokemonDesc = document.getElementById('pokemonDescription').value;
     const pokemonType = document.getElementById('pokemonTypes').value;
     const pokemonPlace = document.getElementById('encounterLocation').value;
@@ -671,6 +672,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const evolutionName = document.getElementById('evolutionName').value;
     const evolutionImage = document.getElementById('evolutionImage').value;
     
+=======
+    // Obtener más campos según sea necesario...
+>>>>>>> 1d7bf5b6f7f1fabcc5835e8d02151370649e1f94
   
     // Llenar el objeto newPokemon con la información del formulario
     newPokemon.name = name;
