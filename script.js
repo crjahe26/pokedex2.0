@@ -593,16 +593,16 @@ document.addEventListener('DOMContentLoaded', function () {
       name: '',
       pokemonID: '',
       pokemonImageSrc: '',
-      description: 'dfgdf',
-      detailID: 'dfgd',
-      detailType: 'dfgd',
-      encounterLocation: 'dfgfgd',
-      preEvolutionID: 'dfg',
-      preEvolution: 'dfg',
-      preEvolutionImageSrc: 'dfg',
-      evolutionID: 'dfg',
-      evolution: 'dfg',
-      evolutionImageSrc: 'dfg'
+      description: '',
+      detailID: '',
+      detailType: '',
+      encounterLocation: '',
+      preEvolutionID: '',
+      preEvolution: '',
+      preEvolutionImageSrc: '',
+      evolutionID: '',
+      evolution: '',
+      evolutionImageSrc: ''
     };
     
 
@@ -661,7 +661,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const name = document.getElementById('pokemonName').value;
     const pokemonID = document.getElementById('pokemonId').value;
     const pokemonImageSrc = document.getElementById('addPokemonImage').value;
-    const pokemonDesc = document.getElementById('pokemonDescription').value;
+    const pokemonDesc = document.getElementById('pokemonDescriptions').value;
     const pokemonType = document.getElementById('pokemonTypes').value;
     const pokemonPlace = document.getElementById('encounterLocation').value;
     const preEvolutionID = document.getElementById('preEvolutionID').value;
