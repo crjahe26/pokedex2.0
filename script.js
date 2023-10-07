@@ -661,14 +661,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const name = document.getElementById('pokemonName').value;
     const pokemonID = document.getElementById('pokemonId').value;
     const pokemonImageSrc = document.getElementById('addPokemonImage').value;
-    // Obtener más campos según sea necesario...
+    const pokemonDesc = document.getElementById('pokemonDescription').value;
+    const pokemonType = document.getElementById('pokemonTypes').value;
+    const pokemonPlace = document.getElementById('encounterLocation').value;
+    const preEvolutionID = document.getElementById('preEvolutionID').value;
+    const preEvolutionName = document.getElementById('preEvolutionName').value;
+    const preEvolutionImage = document.getElementById('preEvolutionImage').value;
+    const evolutionID = document.getElementById('evolutionID').value;
+    const evolutionName = document.getElementById('evolutionName').value;
+    const evolutionImage = document.getElementById('evolutionImage').value;
+    
   
     // Llenar el objeto newPokemon con la información del formulario
     newPokemon.name = name;
     newPokemon.pokemonID = pokemonID;
     newPokemon.pokemonImageSrc = pokemonImageSrc;
-    // Llenar más campos según sea necesario...
-  
+    newPokemon.description = pokemonDesc;
+    newPokemon.detailType = pokemonType;
+    newPokemon.encounterLocation = pokemonPlace;
+    newPokemon.preEvolutionID = preEvolutionID;
+    newPokemon.preEvolutionName = preEvolutionName;
+    newPokemon.preEvolutionImage = preEvolutionImage;
+    newPokemon.evolutionID = evolutionID;
+    newPokemon.evolutionName = evolutionName;
+    newPokemon.evolutionImage = evolutionImage;
+    
     // Agregar el nuevo Pokémon a currentPokemon
     currentPokemon.push(newPokemon);
   
