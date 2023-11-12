@@ -29,7 +29,7 @@ router.get('/:name', (req, res) => {
 // Ejemplo: /api/v1/pokemones/025
 router.get('/:detailID', (req, res) => {
   const { detailID } = req.params;
-  const pokemon = service.findOne(detailID);
+  const pokemon = service.findByID(detailID);
   res.json(pokemon);
 });
 
@@ -38,27 +38,31 @@ router.get('/:detailID', (req, res) => {
 
 router.post('/', (req, res) => {
   const body = req.body;
+  const newPokemon = service.create(body);
   res.status(201).json({
     message: 'created',
-    data: body
-  })
-})
-
-router.patch('/:name', (req, res) => {
-  const { name } = req.params;
-  const body = req.body;
-  res.json({
-    message: 'update',
-    data: body,
-    name
+    data: newPokemon
   });
 });
 
-router.delete('/:name', (req, res) => {
-  const { name } = req.params;
+router.patch('/:pokemonID', (req, res) => {
+  const { pokemonID } = req.params;
+  const body = req.body;
+  const pokemon = service.update(pokemonID, body)
+  res.json({
+    message: 'update',
+    data: pokemon,
+    pokemonID
+  });
+});
+
+router.delete('/:pokemonID', (req, res) => {
+  const { pokemonID } = req.params;
+  const pokemon = service.delete(pokemonID)
   res.json({
     message: 'deleted',
-    name
+    pokemonID,
+    pokemon
   });
 });
 

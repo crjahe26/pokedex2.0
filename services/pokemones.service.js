@@ -207,8 +207,12 @@ class PokemonService {
     }];
   }
 
-  create() {
-
+  create(data) {
+    const newPokemon = {
+      data
+    }
+    this.pokemones.push(newPokemon);
+    return newPokemon;
   }
 
   // Entregar todos los pokemon
@@ -216,8 +220,8 @@ class PokemonService {
     return this.pokemones
   }
 
-  findOne(detailID) {
-    return this.pokemones.find(pokemon => pokemon.detailID === detailID)
+  findByID(pokemonID) {
+    return this.pokemones.find(pokemon => pokemon.pokemonID === pokemonID)
 
   }
 
@@ -249,11 +253,27 @@ class PokemonService {
 
   }
 
-  update() {
+  update(pokemonID, changes) {
+    const index = this.pokemones.findIndex(pokemon => pokemon.pokemonID === pokemonID);
+    if (index === -1) {
+      throw new Error('Pokemon no encontrado')
+    }
+    const pokemon = this.pokemones[index];
+    this.pokemones[index] = {
+      ...pokemon,
+      ...changes
+    };
+    return this.pokemones[index];
 
   }
 
-  delete() {
+  delete(pokemonID) {
+    const index = this.pokemones.findIndex(pokemon => pokemon.pokemonID === pokemonID);
+    if (index === -1) {
+      throw new Error('Pokemon no encontrado')
+    }
+    this.pokemones.splice(index, 1);
+    return {message: true, pokemonID}
 
   }
 }
