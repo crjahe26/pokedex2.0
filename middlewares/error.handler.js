@@ -15,7 +15,7 @@ function errorHandler(err, req, res, next) {
   });
 }
 
-// Dar formato a los errores
+// Dar formato a los errores e identificar su tipo con boom
 function boomErrorHandler(err, req, res, next) {
   if (err.isBoom) {
     const { output } = err;

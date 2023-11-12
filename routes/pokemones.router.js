@@ -1,6 +1,8 @@
 const express = require('express');
 const PokemonService = require('../services/pokemones.service'); // Exporte de los servicios
 const router = express.Router();
+const validatorHandler = require('../middlewares/validator.handler');
+const { createPokemonSchema, deletePokemonSchema, getPokemonSchema } = require('../schemas/pokemones.schema');
 
 // Instanciación de la clase con los servicios
 const service = new PokemonService();
@@ -25,15 +27,18 @@ router.get('/filter', (req, res) => {
 
 // Con el siguiente endpoint podemos filtrar por id
 // Ejemplo: /api/v1/pokemones/025
-router.get('/:pokemonID', async (req, res, next) => {
-  try {
-    const { pokemonID } = req.params;
-    const pokemon = await service.findByID(pokemonID);
-    res.json(pokemon);
-  } catch (error) {
-    next(error);
+router.get('/:pokemonID',
+  validatorHandler(getPokemonSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { pokemonID } = req.params;
+      const pokemon = await service.findByID(pokemonID);
+      res.json(pokemon);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 
 /* // Con el siguiente endpoint podemos filtrar por nombre
@@ -46,13 +51,15 @@ router.get('/:name', async (req, res) => {
 
 
 
-router.post('/', async (req, res) => {
-  const body = req.body;
-  const newPokemon = await service.create(body);
-  res.status(201).json({
-    message: 'created',
-    data: newPokemon
-  });
+router.post('/',
+  validatorHandler(createPokemonSchema, 'params'),
+  async (req, res) => {
+    const body = req.body;
+    const newPokemon = await service.create(body);
+    res.status(201).json({
+      message: 'created',
+      newPokemon
+    });
 });
 
 router.patch('/:pokemonID', async (req, res, next) => {
@@ -70,20 +77,22 @@ router.patch('/:pokemonID', async (req, res, next) => {
   }
 });
 
-router.delete('/:pokemonID', async (req, res) => {
-  try {
-    const { pokemonID } = req.params;
-    const pokemon = await service.delete(pokemonID)
-    res.json({
-      message: 'deleted',
-      pokemonID,
-      pokemon
-    });
-  } catch (error) {
-    res.status(404).json({
-      message: error.message
-    })
-  }
+router.delete('/:pokemonID',
+  validatorHandler(deletePokemonSchema, 'params'),
+  async (req, res) => {
+    try {
+      const { pokemonID } = req.params;
+      const pokemon = await service.delete(pokemonID)
+      res.json({
+        message: 'deleted',
+        pokemonID,
+        pokemon
+      });
+    } catch (error) {
+      res.status(404).json({
+        message: error.message
+      })
+    }
 });
 
 
