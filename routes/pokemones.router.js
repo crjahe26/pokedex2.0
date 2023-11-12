@@ -237,15 +237,15 @@ router.get('/', (req, res) => {
       })
     }
   }
-  if (pkms.lenght != 0 && name != '' && pkms[0] != null) {res.json({pkms})}
-  else if (name == '')  {res.send('Busquedad vacía')}
-  else {res.send('No se encontró ningún pokemon con ese nombre')}
+  if (pkms.lenght != 0 && name != '' && pkms[0] != null) {res.status(202).json({pkms})}
+  else if (name == '')  {res.status(400).send('Busquedad vacía')}
+  else {res.status(404).send('No se encontró ningún pokemon con ese nombre')}
 })
 
 
 router.post('/', (req, res) => {
   const body = req.body;
-  res.json({
+  res.status(201).json({
     message: 'created',
     data: body
   })
