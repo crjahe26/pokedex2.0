@@ -1,3 +1,5 @@
+const boom = require('@hapi/boom');
+
 class PokemonService {
   // Pokemon iniciales
   constructor(){
@@ -218,49 +220,40 @@ class PokemonService {
 
   // Entregar todos los pokemon
   async find() {
-    return this.pokemones
-  }
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(this.pokemones);
+      }, 2000);
+    })
+}
 
   // Buscar un pokemon a partir de su id
   async findByID(pokemonID) {
-    return this.pokemones.find(pokemon => pokemon.pokemonID === pokemonID)
-
+    const pokemon = this.pokemones.find(pokemon => pokemon.pokemonID === pokemonID);
+    if (!pokemon) {
+      throw boom.notFound('Pokemon no encontrado');
+    }
+    return pokemon;
   }
 
-  // Buscar un pokemon a partir de su nombre
+/*   // Buscar un pokemon a partir de su nombre
   async findByName(name) {
     const pkms = [];
-    for(let index = 0; index < this.find().length; index++) {
-      if ( this.find()[index].name.toLowerCase().includes(name.toLowerCase()) ) { // Otra opción es que haga el match completo así: name.toLowerCase() == listadoPokemones[index].name.toLowerCase(), pero me gustó más con el includes XD
-        pkms.push({
-          name: this.find()[index].name,
-          pokemonID: this.find()[index].pokemonID,
-          pokemonImageSrc: this.find()[index].pokemonImageSrc,
-          description: this.find()[index].description,
-          detailID: this.find()[index].detailID,
-          detailType: this.find()[index].detailType,
-          encounterLocation: this.find()[index].encounterLocation,
-
-          preEvolutionID: this.find()[index].preEvolutionID,
-          preEvolution: this.find()[index].preEvolution,
-          preEvolutionImageSrc: this.find()[index].preEvolutionImageSrc,
-
-          evolutionID: this.find()[index].evolutionID,
-          evolution: this.find()[index].evolution,
-          evolutionImageSrc: this.find()[index].evolutionImageSrc
-        })
+    for(let index = 0; index < this.pokemones.length; index++) {
+      if ( this.pokemones[index].name.toLowerCase().includes(name.toLowerCase()) ) { // Otra opción es que haga el match completo así: name.toLowerCase() == listadoPokemones[index].name.toLowerCase(), pero me gustó más con el includes XD
+        pkms.push(this.pokemones[index])
       }
     }
     if (pkms.lenght != 0 && name != '' && pkms[0] != null) {return pkms}
     else {return 'No se encontró ningún pokemon con ese nombre'}
 
-  }
+  } */
 
   // Actualizar campos especificos de un pokemon a partir de su id
   async update(pokemonID, changes) {
     const index = this.pokemones.findIndex(pokemon => pokemon.pokemonID === pokemonID);
     if (index === -1) {
-      throw new Error('Pokemon no encontrado')
+      throw boom.notFound('Pokemon no encontrado');
     }
     const pokemon = this.pokemones[index];
     this.pokemones[index] = {
@@ -275,7 +268,7 @@ class PokemonService {
   async delete(pokemonID) {
     const index = this.pokemones.findIndex(pokemon => pokemon.pokemonID === pokemonID);
     if (index === -1) {
-      throw new Error('Pokemon no encontrado')
+      throw boom.notFound('Pokemon no encontrado');
     }
     this.pokemones.splice(index, 1);
     return {message: true, pokemonID}

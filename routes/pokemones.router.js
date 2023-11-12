@@ -1,6 +1,6 @@
 const express = require('express');
-const router = express.Router();
 const PokemonService = require('../services/pokemones.service'); // Exporte de los servicios
+const router = express.Router();
 
 // Instanciación de la clase con los servicios
 const service = new PokemonService();
@@ -14,25 +14,35 @@ router.get('/', async (req, res) => {
   res.json(pokemon);
 });
 
-
-// Con el siguiente endpoint podemos filtrar por nombre
-// Ejemplo: /api/v1/pokemones/Pikachu
-router.get('/:name', async (req, res) => {
-  const { name } = req.params;
-  const pokemon = await service.findByName(name);
-  res.json(pokemon);
+router.get('/filter', (req, res) => {
+  res.send('Yo soy un filter');
 });
+
+
+
 
 
 
 // Con el siguiente endpoint podemos filtrar por id
 // Ejemplo: /api/v1/pokemones/025
-router.get('/:pokemonID', async (req, res) => {
-  const { detailID } = req.params;
-  const pokemon = await service.findByID(detailID);
-  res.json(pokemon);
+router.get('/:pokemonID', async (req, res, next) => {
+  try {
+    const { pokemonID } = req.params;
+    const pokemon = await service.findByID(pokemonID);
+    res.json(pokemon);
+  } catch (error) {
+    next(error);
+  }
 });
 
+
+/* // Con el siguiente endpoint podemos filtrar por nombre
+// Ejemplo: /api/v1/pokemones/Pikachu
+router.get('/:name', async (req, res) => {
+  const { name } = req.params;
+  const pokemon = await service.findByName(name);
+  res.json(pokemon);
+}); */
 
 
 
@@ -45,7 +55,7 @@ router.post('/', async (req, res) => {
   });
 });
 
-router.patch('/:pokemonID', async (req, res) => {
+router.patch('/:pokemonID', async (req, res, next) => {
   try {
     const { pokemonID } = req.params;
     const body = req.body;
@@ -56,9 +66,7 @@ router.patch('/:pokemonID', async (req, res) => {
       pokemonID
     });
   } catch (error) {
-    res.status(404).json({
-      message: error.message
-    })
+    next(error);
   }
 });
 
