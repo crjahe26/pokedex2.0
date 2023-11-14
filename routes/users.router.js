@@ -18,12 +18,12 @@ router.get('/',
     }
 });
 
-router.get('/:id',
+router.get('/:u_id',
     validatorHandler( getUserSchema, 'params'),
     async( req, res, next) => {
         try {
-            const{ id } = req.params;
-            const category = await service.findOne(id);
+            const {u_id} = req.params;
+            const category = await service.findOne(u_id);
             res.json(category);
         }
         catch(error){
@@ -46,14 +46,14 @@ router.post('/',
     }
 );
 
-router.patch('/:id',
+router.patch('/:u_id',
     validatorHandler(getUserSchema,'params'),
     validatorHandler(updateUserSchema,'body'),
     async(req, res, next) => {
         try { 
-            const{id} = req.params;
+            const{u_id} = req.params;
             const body = req.body;
-            const category = await service.update(id,body);
+            const category = await service.update(u_id,body);
             res.json(category);
         }
         catch(error){
@@ -62,13 +62,13 @@ router.patch('/:id',
     }
 );
 
-router.delete('/:id',
+router.delete('/:u_id',
     validatorHandler(getUserSchema,'params'),
     async(req, res, next) => {
         try { 
-            const{id} = req.params;
-            await service.delete(id);
-            res.status(201).json({id});
+            const{u_id} = req.params;
+            const rta = await service.delete(u_id);
+            res.json(rta);
         }
         catch(error){
             next(error);

@@ -1,11 +1,10 @@
 const boom = require('@hapi/boom');
-const pool = require('../libs/postgres.pool')
+const sequelize = require('../libs/sequelize')
 
 class PokemonService {
   // Pokemon iniciales
   constructor(){
-    this.pool = pool;
-    this.pool.on('error', (err) => console.error(err))
+    this.pokemon = []
   }
 
   // Crear un nuevo pokemon
@@ -20,19 +19,19 @@ class PokemonService {
   // Entregar todos los pokemon
   async find() {
     const query = 'SELECT * FROM pokemon';
-    const rta = await this.pool.query(query);
-    return rta.rows;
+    const [data, metadata] = await sequelize.query(query);
+    return data;
   }
 
   // Buscar un pokemon a partir de su id
   async findByID(pokemonID) {
     //const pokemon = this.pokemones.find(pokemon => pokemon.pokemonID === pokemonID);
     const query = 'SELECT * FROM pokemon WHERE p_id = ' + pokemonID;
-    const pokemon = await this.pool.query(query);
+    const [pokemon, metadata] = await sequelize.query(query);
     if (!pokemon) {
       throw boom.notFound('Pokemon no encontrado');
     }
-    return pokemon.rows;
+    return pokemon;
   }
 
 /*   // Buscar un pokemon a partir de su nombre
