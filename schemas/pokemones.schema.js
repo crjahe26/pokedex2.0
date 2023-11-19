@@ -4,7 +4,10 @@ const pokemonID = Joi.number();
 const name = Joi.string().alphanum().min(3).max(20);
 const description = Joi.string().min(15);
 const imagesrc = Joi.string().min(4);
-const location = Joi.string().min(2);
+const location = Joi.number();
+const pre_evolucion = Joi.number();
+const evolucion = Joi.number();
+
 
 
 const createPokemonSchema = Joi.object({
@@ -12,7 +15,10 @@ const createPokemonSchema = Joi.object({
   p_id: pokemonID.required(),
   p_description: description.required(),
   p_imagesrc: imagesrc.required(),
-  l_id: location
+  l_id: location,
+  pre_id: pre_evolucion,
+  evol_id: evolucion
+
 });
 
 const deletePokemonSchema = Joi.object({
@@ -29,7 +35,9 @@ const updatePokemonSchema = Joi.object({
   p_id: pokemonID,
   p_description: description,
   p_imagesrc: imagesrc,
-  l_id: location
+  l_id: location,
+  pre_id: pre_evolucion,
+  evol_id: evolucion
 });
 
 

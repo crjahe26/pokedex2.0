@@ -1,6 +1,7 @@
 const boom = require('@hapi/boom');
 const { models } = require('./../libs/sequelize');
 const { PokemonLocation } = require('../db/models/pokemon_location.model');
+const { Pokemon } = require('../db/models/pokemon.model');
 
 class LocationService {
     constructor(){}
@@ -11,8 +12,16 @@ class LocationService {
       }
 
     async find(){
-        const rta = await models.PokemonLocation.findAll();
-        return rta;
+      const rta = await models.PokemonLocation.findAll(/* {
+          include: [
+            {
+              model: Pokemon,
+              as: 'pokemon',
+              attributes: ['p_id', 'p_name']
+            }
+          ]
+        } */);
+      return rta;
     }
 
     async findByField(value) {

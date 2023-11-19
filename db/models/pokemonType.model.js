@@ -24,7 +24,7 @@ class PokemonType extends Model {
         return {
             sequelize,
             tableName: POKEMON_TYPE_TABLE,
-            modedlName: 'Pokemon_type',
+            modelName: 'Pokemon_type',
             timestamps: false
         }
     }

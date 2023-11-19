@@ -18,12 +18,12 @@ router.get('/',
     }
 });
 
-router.get('/:evol_id',
+router.get('/:pkm_id',
   validatorHandler(getPokemonEvolutionSchema, 'params'),
   async (req, res, next) => {
     try {
-      const { evol_id } = req.params;
-      const evolution = await service.findOne(evol_id);
+      const { pkm_id } = req.params;
+      const evolution = await service.findOne(pkm_id);
       res.json(evolution);
     } catch (error) {
       next(error);
@@ -48,34 +48,34 @@ router.post('/',
   }
 });
 
-router.patch('/:evol_id',
+router.patch('/:pkm_id',
   validatorHandler(getPokemonEvolutionSchema,'params'),
   validatorHandler(updatePokemonEvolutionSchema,'body'),
   async (req, res, next) => {
   try {
-    const { evol_id } = req.params;
+    const { pkm_id } = req.params;
     const body = req.body;
-    const evolution = await service.update(evol_id, body)
+    const evolution = await service.update(pkm_id, body)
     res.json({
       message: 'update',
       data: evolution,
-      evol_id
+      pkm_id
     });
   } catch (error) {
     next(error);
   }
 });
 
-router.delete('/:evol_id',
+router.delete('/:pkm_id',
   validatorHandler(getPokemonEvolutionSchema,'params'),
   validatorHandler(deletePokemonEvolutionSchema, 'params'),
   async (req, res, next) => {
     try {
-      const { evol_id } = req.params;
-      const pokemon = await service.delete(evol_id)
+      const { pkm_id } = req.params;
+      const pokemon = await service.delete(pkm_id)
       res.json({
         message: 'deleted',
-        evol_id,
+        pkm_id,
         pokemon
       });
     } catch (error) {

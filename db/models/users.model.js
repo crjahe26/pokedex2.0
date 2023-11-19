@@ -39,7 +39,7 @@ class Users extends Model {
         return {
             sequelize,
             tableName: USERS_TABLE,
-            modedlName: 'Users',
+            modelName: 'Users',
             timestamps: false
         }
     }

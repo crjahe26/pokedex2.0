@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const { POKEMON_TABLE } = require('./pokemon.model')
 
 const POKEMON_PREEVOLUTION_TABLE = 'pokemon_preevolution';
 
@@ -9,16 +10,19 @@ const PokemonPreEvolutionSchema = {
         primaryKey: true,
         type: DataTypes.INTEGER
     },
-    e_id:{
+    pre_id:{
         allowNull: true,
         type: DataTypes.INTEGER
     }
 }
 
 class PokemonPreEvolution extends Model {
-    static associate() {
-        // associate
+    static associate(models) {
+        // Relación con Pokemon (1)
+        this.belongsTo(models.Pokemon, { foreignKey: 'evol_id', as: 'pokemon' });
+        
     }
+
 
     static config(sequelize){
         return {

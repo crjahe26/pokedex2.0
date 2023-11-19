@@ -8,15 +8,19 @@ const { PokemonPreEvolution, PokemonPreEvolutionSchema} = require('./pokemonPreE
 
 function setupModels(sequelize) {
     Users.init(UsersSchema, Users.config(sequelize));
-    Pokemon.init(PokemonSchema, Pokemon.config(sequelize));
     PokemonLocation.init(PokemonLocationSchema, PokemonLocation.config(sequelize));
-    PokemonPreEvolution.init(PokemonPreEvolutionSchema, PokemonPreEvolution.config(sequelize));
-    PokemonEvolution.init(PokemonEvolutionSchema, PokemonEvolution.config(sequelize));
     PokemonType.init(PokemonTypeSchema, PokemonType.config(sequelize));
     PokemonTypes.init(PokemonTypesSchema, PokemonTypes.config(sequelize));
+    PokemonPreEvolution.init(PokemonPreEvolutionSchema, PokemonPreEvolution.config(sequelize));
+    PokemonEvolution.init(PokemonEvolutionSchema, PokemonEvolution.config(sequelize));
+    Pokemon.init(PokemonSchema, Pokemon.config(sequelize));
 
+    
+    //PokemonLocation.associate(sequelize.models);
 
-    //Pokemon.associate(sequelize.models);
+    PokemonPreEvolution.associate(sequelize.models);
+    PokemonEvolution.associate(sequelize.models);
+    Pokemon.associate(sequelize.models);
 }
 
 module.exports = setupModels;

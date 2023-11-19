@@ -1,25 +1,25 @@
 const Joi = require('joi');
 
+const pokemonID = Joi.number().integer();
 const evolutionID = Joi.number().integer();
-const preEvolutionID = Joi.number().integer();
 
 const createPokemonEvolutionSchema = Joi.object({
-  evol_id: evolutionID.required(),
-  p_id: preEvolutionID
+  pkm_id: pokemonID.required(),
+  evol_id: evolutionID
 });
 
 const updatePokemonEvolutionSchema = Joi.object({
-  evol_id: evolutionID,
-  p_id: preEvolutionID
+  pkm_id: pokemonID,
+  evol_id: evolutionID
 });
 
 const getPokemonEvolutionSchema = Joi.object({
-    evol_id: evolutionID.required()
+  pkm_id: pokemonID.required()
 });
 
 const deletePokemonEvolutionSchema = Joi.object({
-    evol_id: evolutionID.required()
-  });
+  pkm_id: pokemonID.required()
+});
 
 
 

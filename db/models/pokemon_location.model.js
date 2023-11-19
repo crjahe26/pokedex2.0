@@ -16,15 +16,19 @@ const PokemonLocationSchema = {
 }
 
 class PokemonLocation extends Model {
-    static associate() {
-        // associate
+    static associate(models) {
+        // Relación con Pokemon (0 - n)
+        this.belongsToMany(models.Pokemon, {
+            foreignKey: 'l_id',
+            as: 'pokemon'
+        });
     }
 
     static config(sequelize){
         return {
             sequelize,
             tableName: POKEMON_LOCATION_TABLE,
-            modedlName: 'Pokemon_location',
+            modedlName: 'pokemon_location',
             timestamps: false
         }
     }

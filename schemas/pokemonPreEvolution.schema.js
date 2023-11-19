@@ -5,12 +5,12 @@ const pokemonEvolutionID = Joi.number().integer();
 
 const createPokemonPreEvolutionSchema = Joi.object({
   evol_id: evolutionID.required(),
-  e_id: pokemonEvolutionID
+  pre_id: pokemonEvolutionID
 });
 
 const updatePokemonPreEvolutionSchema = Joi.object({
   evol_id: evolutionID,
-  e_id: pokemonEvolutionID
+  pre_id: pokemonEvolutionID
 });
 
 const getPokemonPreEvolutionSchema = Joi.object({

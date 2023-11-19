@@ -1,6 +1,10 @@
 const boom = require('@hapi/boom');
 const { models } = require('./../libs/sequelize');
 const { Pokemon } = require('../db/models/pokemon.model');
+const { PokemonEvolution } = require('../db/models/pokemonEvolutions.model');
+const { PokemonPreEvolution } = require('../db/models/pokemonPreEvolutions.model');
+const { PokemonLocation } = require('../db/models/pokemon_location.model');
+
 
 class PokemonService {
   // Pokemon iniciales
@@ -13,7 +17,25 @@ class PokemonService {
   }
 
   async find(){
-    const rta = await models.Pokemon.findAll();
+    const rta = await models.Pokemon.findAll({
+      include: [
+        {
+          model: PokemonEvolution,
+          as: 'evolutions',
+          attributes: ['evol_id']
+        },
+        {
+          model: PokemonPreEvolution,
+          as: 'preEvolution',
+          attributes: ['pre_id']
+        },
+        {
+          model: PokemonLocation,
+          as: 'pokemon_location',
+          attributes: ['l_id', 'l_name']
+        }
+      ]
+    });
     return rta;
   }
 
@@ -21,7 +43,24 @@ class PokemonService {
     const pokemon = await models.Pokemon.findOne({
         where: {
             ['p_name']: value
-        }
+        },
+        include: [
+          {
+            model: PokemonEvolution,
+            as: 'evolutions',
+            attributes: ['evol_id']
+          },
+          {
+            model: PokemonPreEvolution,
+            as: 'preEvolution',
+            attributes: ['pre_id']
+          },
+          {
+            model: PokemonLocation,
+            as: 'locations',
+            attributes: ['l_id', 'l_name']
+          }
+        ]
     });
 
     if (!pokemon) {
@@ -32,7 +71,26 @@ class PokemonService {
   }
 
   async findOne(p_id){
-    const pokemon = await models.Pokemon.findByPk(p_id);
+    const pokemon = await models.Pokemon.findByPk(p_id,
+      {
+        include: [
+          {
+            model: PokemonEvolution,
+            as: 'evolutions',
+            attributes: ['evol_id']
+          },
+          {
+            model: PokemonPreEvolution,
+            as: 'preEvolution',
+            attributes: ['pre_id']
+          },
+          {
+            model: PokemonLocation,
+            as: 'locations',
+            attributes: ['l_id', 'l_name']
+          }
+        ]
+      });
     if (!pokemon) {
         throw boom.notFound('Pokemon not found');
     }

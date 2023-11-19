@@ -3,21 +3,22 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const POKEMON_EVOLUTION_TABLE = 'pokemon_evolution';
 
 const PokemonEvolutionSchema = {
-    evol_id: {
+    pkm_id: {
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,
         type: DataTypes.INTEGER
     },
-    p_id:{
+    evol_id:{
         allowNull: true,
         type: DataTypes.INTEGER
     }
 }
 
 class PokemonEvolution extends Model {
-    static associate() {
-        // associate
+    static associate(models) {
+        // Relación con Pokemon (1)
+        this.belongsTo(models.Pokemon, { foreignKey: 'pkm_id', as: 'pokemon' });
     }
 
     static config(sequelize){

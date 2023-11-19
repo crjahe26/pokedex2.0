@@ -1,6 +1,7 @@
 const boom = require('@hapi/boom');
 const { models } = require('./../libs/sequelize');
 const { PokemonPreEvolution } = require('../db/models/pokemonPreEvolutions.model');
+const { Pokemon } = require('../db/models/pokemon.model');
 
 class PreEvolutionsService {
   constructor(){}
@@ -11,12 +12,28 @@ class PreEvolutionsService {
   }
 
   async find(){
-    const rta = await models.PokemonPreEvolution.findAll();
+    const rta = await models.PokemonPreEvolution.findAll({
+      include: [
+        {
+          model: Pokemon,
+          as: 'pokemon',
+          attributes: ['p_id', 'p_name']
+        }
+      ]
+    });
     return rta;
   }
 
   async findOne(evol_id){
-    const evolution = await models.PokemonPreEvolution.findByPk(evol_id);
+    const evolution = await models.PokemonPreEvolution.findByPk(evol_id, {
+      include: [
+        {
+          model: Pokemon,
+          as: 'pokemon',
+          attributes: ['p_id', 'p_name']
+        }
+      ]
+    });
     if (!evolution) {
         throw boom.notFound('Evolution not found');
     }
