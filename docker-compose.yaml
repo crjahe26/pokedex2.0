@@ -20,5 +20,5 @@ services:
     ports:
       - 5050:80
     volumes:
-      - ./pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin_data:/var/lib/pgadmin/sessions
 
