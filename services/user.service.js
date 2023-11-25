@@ -27,6 +27,14 @@ class UserService{
         return { user };
     }
 
+    async findByEmailAndPassword(email, password){
+        const user = await models.Users.findOne({where: { u_email: email, u_password: password }});
+        if (!user) {
+            throw boom.notFound('user not found');
+        }
+        return { user };
+    }
+
     async update(u_id, changes){
         const user = await this.findOne(u_id);
         const [idUpdated, updatedUser] = await Users.update(changes,  {where: { u_id: u_id }, returning:true});

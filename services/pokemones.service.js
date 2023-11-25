@@ -4,11 +4,12 @@ const { Pokemon } = require('../db/models/pokemon.model');
 const { PokemonEvolution } = require('../db/models/pokemonEvolutions.model');
 const { PokemonPreEvolution } = require('../db/models/pokemonPreEvolutions.model');
 const { PokemonLocation } = require('../db/models/pokemon_location.model');
+const { Op } = require('sequelize');
 
 
 class PokemonService {
   // Pokemon iniciales
-  constructor(){}
+  constructor() { }
 
   // Crear un nuevo pokemon
   async create(data) {
@@ -16,7 +17,7 @@ class PokemonService {
     return newPokemon;
   }
 
-  async find(){
+  async find() {
     const rta = await models.Pokemon.findAll({
       include: [
         {
@@ -40,37 +41,39 @@ class PokemonService {
   }
 
   async findByField(value) {
-    const pokemon = await models.Pokemon.findOne({
-        where: {
-            ['p_name']: value
+    const pokemon = await models.Pokemon.findAll({
+      where: {
+        p_name: {
+          [Op.iLike]: `%${value}%`
+        }
+      },
+      include: [
+        {
+          model: PokemonEvolution,
+          as: 'evolutions',
+          attributes: ['evol_id']
         },
-        include: [
-          {
-            model: PokemonEvolution,
-            as: 'evolutions',
-            attributes: ['evol_id']
-          },
-          {
-            model: PokemonPreEvolution,
-            as: 'preEvolution',
-            attributes: ['pre_id']
-          },
-          {
-            model: PokemonLocation,
-            as: 'locations',
-            attributes: ['l_id', 'l_name']
-          }
-        ]
+        {
+          model: PokemonPreEvolution,
+          as: 'preEvolution',
+          attributes: ['pre_id']
+        },
+        {
+          model: PokemonLocation,
+          as: 'pokemon_location',
+          attributes: ['l_id', 'l_name']
+        }
+      ]
     });
 
     if (!pokemon) {
-        throw boom.notFound('Pokemon not found');
+      throw boom.notFound('Pokemon not found');
     }
 
     return { pokemon };
   }
 
-  async findOne(p_id){
+  async findOne(p_id) {
     const pokemon = await models.Pokemon.findByPk(p_id,
       {
         include: [
@@ -92,22 +95,22 @@ class PokemonService {
         ]
       });
     if (!pokemon) {
-        throw boom.notFound('Pokemon not found');
+      throw boom.notFound('Pokemon not found');
     }
     return { pokemon };
   }
 
-  async update(p_id, changes){
+  async update(p_id, changes) {
     const pokemon = await this.findOne(p_id);
-    const [idUpdated, updatedUser] = await Pokemon.update(changes,  {where: { p_id: p_id }, returning:true});
-    return {idUpdated, updatedUser};
+    const [idUpdated, updatedUser] = await Pokemon.update(changes, { where: { p_id: p_id }, returning: true });
+    return { idUpdated, updatedUser };
   }
 
-  async delete(p_id){
+  async delete(p_id) {
     const pokemon = await this.findOne(p_id);
-    await Pokemon.destroy({where: { p_id: p_id }});
+    await Pokemon.destroy({ where: { p_id: p_id } });
     return { p_id, pokemon };
-}
+  }
 }
 
 

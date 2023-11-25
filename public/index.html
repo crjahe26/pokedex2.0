@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>POKEDEX 2.0</title>
-  <link id="css-link" rel="stylesheet" href="styles.css">
-  <script src="script.js"></script>
-  <!-- <script src="index.js"></script> -->
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/stylePokedex.css">
   <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+  <script src="/script.js"></script>
 </head>
 <body>
 
@@ -64,8 +64,8 @@
       <!-- Contenido del modal de Log In -->
       <form id="logInForm">
         <!-- Campos para el formulario de Log In -->
-        <label for="email">Correo electrónico:</label>
-        <input type="email" id="email" name="email"><br>
+        <label for="emailLogIn">Correo electrónico:</label>
+        <input type="email" id="emailLogIn" name="email"><br>
   
         <label for="passwordLogIn">Contraseña:</label>
         <input type="password" id="passwordLogIn" name="passwordLogIn"><br>
@@ -138,7 +138,7 @@
         <input type="text" id="pokemonId" name="pokemonID" required><br><br>
       
         <label for="pokemonImage">Imagen del Pokémon:</label>
-        <input type="text" id="pokemonImage" name="pokemonImage" required><br><br>
+        <input type="text" id="pokemonImageInput" name="pokemonImage" required><br><br>
       
         <label for="pokemonDescription">Descripción del Pokémon:</label>
         <textarea id="pokemonDescriptions" name="pokemonDescription" rows="4" cols="50" required></textarea><br><br>
@@ -219,77 +219,7 @@
 
   <!-- Contenedor para la vista de cajas -->
     <div id="boxesViews" class="pokemon-container">
-        <div class="pokemon-box" data-pokemon-id="172">
-            <img src="./src/images/pichu.png" alt="Pichu">
-            <h3>Pichu</h3>
-            <p>Tipo: Eléctrico</p>
-        </div>
-    
-        <div class="pokemon-box" data-pokemon-id="025">
-            <img src="./src/images/pikachu.png" alt="Pikachu">
-            <h3>Pikachu</h3>
-            <p>Tipo: Eléctrico</p>
-        </div>
-        
-        <div class="pokemon-box" data-pokemon-id="026">
-            <img src="./src/images/raichu.png" alt="Raichu">
-            <h3>Raichu</h3>
-            <p>Tipo: Eléctrico</p>
-        </div>
-
-        <div class="pokemon-box" data-pokemon-id="001">
-            <img src="./src/images/bulbasaur.png" alt="Bulbasaur">
-            <h3>Bulbasaur</h3>
-            <p>Tipo: Planta, Veneno</p>
-        </div>
-        
-        <div class="pokemon-box" data-pokemon-id="002">
-            <img src="./src/images/ivysaur.png" alt="Ivysaur">
-            <h3>Ivysaur</h3>
-            <p>Tipo: Planta, Veneno</p>
-        </div>
-        
-        <div class="pokemon-box" data-pokemon-id="003">
-            <img src="./src/images/venusaur.png" alt="Venusaur">
-            <h3>Venusaur</h3>
-            <p>Tipo: Planta, Veneno</p>
-        </div>
-
-        <div class="pokemon-box" data-pokemon-id="004">
-            <img src="./src/images/charmander.png" alt="Charmander">
-            <h3>Charmander</h3>
-            <p>Tipo: Fuego</p>
-        </div>
-        
-        <div class="pokemon-box" data-pokemon-id="005">
-            <img src="./src/images/charmeleon.png" alt="Charmeleon">
-            <h3>Charmeleon</h3>
-            <p>Tipo: Fuego</p>
-        </div>
-        
-        <div class="pokemon-box" data-pokemon-id="006">
-            <img src="./src/images/charizard.png" alt="Charizard">
-            <h3>Charizard</h3>
-            <p>Tipo: Fuego</p>
-        </div>
-
-        <div class="pokemon-box" data-pokemon-id="007">
-            <img src="./src/images/squirtle.png" alt="Squirtle">
-            <h3>Squirtle</h3>
-            <p>Tipo: Agua</p>
-        </div>
-        
-        <div class="pokemon-box" data-pokemon-id="008">
-            <img src="./src/images/wartortle.png" alt="Wartortle">
-            <h3>Wartortle</h3>
-            <p>Tipo: Agua</p>
-        </div>
-        
-        <div class="pokemon-box" data-pokemon-id="009">
-            <img src="./src/images/blastoise.png" alt="Blastoise">
-            <h3>Blastoise</h3>
-            <p>Tipo: Agua</p>
-        </div>
+    <!-- Aqui el script.js carga las cards de los pokemones -->
     </div>
 </div>
 
@@ -403,6 +333,5 @@
       </div>
   </div>
 </div>
-
 </body>
 </html>

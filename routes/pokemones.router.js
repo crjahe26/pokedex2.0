@@ -65,12 +65,17 @@ router.post('/',
   validatorHandler(createPokemonSchema, 'body'),
   async (req, res, next) => {
     try {
-      const body = req.body;
-      const newPokemon = await service.create(body);
-      res.status(201).json({
-        message: 'created',
-        newPokemon
-      });
+      const { p_id, p_name, p_imagesrc, p_description } = req.body; // Recibe los datos del nuevo Pokémon desde el cuerpo de la solicitud
+
+    // Crea un nuevo registro de Pokémon en la base de datos utilizando el modelo de Sequelize
+    const newPokemon = await service.create({
+      p_id,
+      p_name,
+      p_imagesrc,
+      p_description,
+      // Otros campos que podrías tener en tu modelo
+    });
+    res.status(201).json(newPokemon);
     }
     catch(error){
       next(error);
