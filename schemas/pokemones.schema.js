@@ -1,35 +1,44 @@
 const Joi = require('joi');
 
-const pokemonID = Joi.string();
+const pokemonID = Joi.number();
 const name = Joi.string().alphanum().min(3).max(20);
 const description = Joi.string().min(15);
-const detailType = Joi.string().min(4);
+const imagesrc = Joi.string().min(4);
+const location = Joi.number();
+const pre_evolucion = Joi.number();
+const evolucion = Joi.number();
 
-const userName = Joi.string().alphanum().min(3).max(20);;
-const email = Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } });
-const password = Joi.string().alphanum().min(8).max(30);
 
 
 const createPokemonSchema = Joi.object({
-  name: name.required(),
-  pokemonID: pokemonID.required(),
-  description: description.required(),
-  detailType: detailType.required(),
+  p_name: name.required(),
+  p_id: pokemonID.required(),
+  p_description: description.required(),
+  p_imagesrc: imagesrc.required(),
+  l_id: location,
+  pre_id: pre_evolucion,
+  evol_id: evolucion
+
 });
 
 const deletePokemonSchema = Joi.object({
-  pokemonID: pokemonID.required()
+  p_id: pokemonID.required()
 });
 
 const getPokemonSchema = Joi.object({
-  pokemonID: pokemonID.required()
+  p_id: pokemonID,
+  p_name: name
+});
+
+const updatePokemonSchema = Joi.object({
+  p_name: name,
+  p_id: pokemonID,
+  p_description: description,
+  p_imagesrc: imagesrc,
+  l_id: location,
+  pre_id: pre_evolucion,
+  evol_id: evolucion
 });
 
 
-const createUserSchema = Joi.object({
-  userName: userName.required(),
-  email: email.required(),
-  password: password.required()
-});
-
-module.exports = { createPokemonSchema, deletePokemonSchema, getPokemonSchema, createUserSchema };
+module.exports = { createPokemonSchema, deletePokemonSchema, getPokemonSchema, updatePokemonSchema };

@@ -1,9 +1,10 @@
 const express = require('express');
 const PokemonService = require('../services/pokemones.service'); // Exporte de los servicios
-const router = express.Router();
 const validatorHandler = require('../middlewares/validator.handler');
-const { createPokemonSchema, deletePokemonSchema, getPokemonSchema } = require('../schemas/pokemones.schema');
 
+const { createPokemonSchema, deletePokemonSchema, getPokemonSchema, updatePokemonSchema } = require('../schemas/pokemones.schema');
+
+const router = express.Router();
 // Instanciación de la clase con los servicios
 const service = new PokemonService();
 
@@ -11,28 +12,37 @@ const service = new PokemonService();
 
 // Con el siguiente endpoint muestra todos los pokemon disponibles
 // Ejemplo: /api/v1/pokemones/
-router.get('/', async (req, res) => {
-  const pokemon = await service.find();
-  res.json(pokemon);
+router.get('/',
+  async (req, res, next) => {
+    try {
+      const pokemon = await service.find();
+      res.json(pokemon);
+    } catch(error){
+      next(error);
+    }
 });
-
-router.get('/filter', (req, res) => {
-  res.send('Yo soy un filter');
-});
-
-
-
-
-
 
 // Con el siguiente endpoint podemos filtrar por id
 // Ejemplo: /api/v1/pokemones/025
-router.get('/:pokemonID',
+router.get('/:p_id',
   validatorHandler(getPokemonSchema, 'params'),
   async (req, res, next) => {
     try {
-      const { pokemonID } = req.params;
-      const pokemon = await service.findByID(pokemonID);
+      const { p_id } = req.params;
+      const pokemon = await service.findOne(p_id);
+      res.json(pokemon);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.get('/name/:p_name',
+  validatorHandler(getPokemonSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { p_name } = req.params;
+      const pokemon = await service.findByField(p_name);
       res.json(pokemon);
     } catch (error) {
       next(error);
@@ -52,40 +62,49 @@ router.get('/:name', async (req, res) => {
 
 
 router.post('/',
-  validatorHandler(createPokemonSchema, 'params'),
-  async (req, res) => {
-    const body = req.body;
-    const newPokemon = await service.create(body);
-    res.status(201).json({
-      message: 'created',
-      newPokemon
-    });
+  validatorHandler(createPokemonSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const newPokemon = await service.create(body);
+      res.status(201).json({
+        message: 'created',
+        newPokemon
+      });
+    }
+    catch(error){
+      next(error);
+  }
 });
 
-router.patch('/:pokemonID', async (req, res, next) => {
+router.patch('/:p_id',
+  validatorHandler(getPokemonSchema,'params'),
+  validatorHandler(updatePokemonSchema,'body'),
+  async (req, res, next) => {
   try {
-    const { pokemonID } = req.params;
+    const { p_id } = req.params;
     const body = req.body;
-    const pokemon = await service.update(pokemonID, body)
+    const pokemon = await service.update(p_id, body)
     res.json({
       message: 'update',
       data: pokemon,
-      pokemonID
+      p_id
     });
   } catch (error) {
     next(error);
   }
 });
 
-router.delete('/:pokemonID',
+router.delete('/:p_id',
+  validatorHandler(getPokemonSchema,'params'),
   validatorHandler(deletePokemonSchema, 'params'),
-  async (req, res) => {
+  async (req, res, next) => {
     try {
-      const { pokemonID } = req.params;
-      const pokemon = await service.delete(pokemonID)
+      const { p_id } = req.params;
+      const pokemon = await service.delete(p_id)
       res.json({
         message: 'deleted',
-        pokemonID,
+        p_id,
         pokemon
       });
     } catch (error) {
