@@ -8,6 +8,7 @@ La interfaz permite al usuario ver la información de los Pokémon en dos vistas
 
 1. [Javier Dario Echavarria Cano](https://github.com/BlackPixl)
 2. [Cristian Jaramillo Herrera](https://github.com/crjahe26)
+3. [Juan Diego Ortiz Tabares](https://github.com/juandiortiz25)
 
 ## Instrucciones de Ejecución
 Para ejecutar la Pokédex en tu navegador, sigue estos pasos:
