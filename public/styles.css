@@ -116,7 +116,8 @@ header {
 /* Estilos para el modal de vista detallada */
 
   #pokemonDetailModal .modal-content {
-    max-width: 90%;
+    padding: 1%;
+    max-width: 70%;
     margin: 10% auto;
   }
   
@@ -160,9 +161,9 @@ header {
   }
   
   #pokemonDetailModal .pokemon-info .info-item img {
-    width: 90%;
-    height: 90%;
-    margin-bottom: 5%;
+    width: 100%; /* Ajustar el tamaño al 100% del contenedor */
+    height: auto; /* Ajustar la altura automáticamente */
+    max-width: 100%; /* Asegurar que no exceda el ancho del contenedor */
   }
   
   #pokemonDetailModal .details {

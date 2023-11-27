@@ -6,6 +6,7 @@ body {
     padding: 0;
     width: 100vw;
     height: 100vh;
+    font-family: 'Chivo Mono', sans-serif;
 }
 
 header {
@@ -15,7 +16,6 @@ header {
     padding: 10px 20px;
     background-color: #f0f0f0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    font-family: 'Pokemon Solid', sans-serif;
 }
 
 .button-container button {
@@ -496,7 +496,7 @@ header {
 
 #screen-right {
     background-color: #4a4a4a;
-    height: 100px;
+    height: 120px;
     width: 280px;
     border-radius: 10px;
     position: relative;
@@ -508,21 +508,19 @@ header {
 
 #screen-right p {
     margin: 0;
-    padding-bottom: 10px;
-    width: 100px;
+    width: 290px;
     color: #ffffff;
 }
 
 #screen-right #pokemon-title-p {
     text-align: center;
     width: 100%;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     font-weight: bold;
 }
 
 #screen-right .pokemon-stats-left {
     float: left;
-    padding-left: 30px;
 }
 
 #screen-right .pokemon-stats-right {
@@ -619,7 +617,7 @@ header {
 }
 
 #grey-buttons .key {
-    width: 130px;
+    width: auto;
     height: 42px;
     border-radius: 10px;
     background-color: #4a4a4a;
@@ -675,7 +673,7 @@ header {
 #screen-left-background {
     height: 155px;
     width: 155px;
-    left: 33px;
+    left: 45px;
     top: 58px;
 }
 
@@ -684,6 +682,17 @@ header {
     width: 130px;
     left: 13px;
     top: 12px;
+}
+
+#screen-left-image {
+    width: 130px;
+    height: auto;
+    max-height: 130px;
+}
+
+#screen-right .pokemon-stats-left {
+    max-width: 140px;
+    padding-left: 0px;
 }
 
 #screen-left-little-lights {
@@ -714,6 +723,10 @@ header {
     top: -7px;
 }
 
+#grey-buttons p {
+    line-height: 5pt;
+}
+
 .binding {
     width: 32px;
     height: 425px;
@@ -732,9 +745,9 @@ header {
 }
 
 #screen-right {
-    left: 17px;
+    left: 40px;
     width: 133px;
-    font-size: 9pt;
+    font-size: 8pt;
 }
 #keyboard {
     height: 32px;
@@ -742,6 +755,7 @@ header {
     left: 17px;
 }
 #buscar-field {
+    position: absolute;
     font-size: 10px;
 }
 #elongated-lights {
@@ -768,7 +782,7 @@ header {
 }
 
 #grey-buttons .key {
-    width: 63px;
+    width: auto;
     height: 30px;
 }
 #screen-right #pokemon-title-p {
@@ -779,3 +793,25 @@ header {
 }
 
 }
+
+
+/* Estilos para el botón flotante */
+.floating-button {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ffcb05;
+    color: #3a4aad; /* Color del símbolo "+" (puedes cambiarlo) */
+    text-align: center;
+    line-height: 50px; /* Centrar verticalmente el contenido */
+    font-size: 30px; /* Tamaño del símbolo "+" */
+    cursor: pointer;
+    border: 2px solid #3a4aad;
+  }
+  
+  .floating-button:before {
+    content: "+"; /* Agrega el símbolo "+" antes del contenido del botón */
+  }
